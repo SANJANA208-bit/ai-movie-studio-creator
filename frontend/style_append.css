@@ -1,0 +1,10 @@
+/* Add ken burns animation */
+@keyframes kenburns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.15) translate(-2%, -2%); }
+}
+
+.modal-content img {
+    /* ensure animation works smoothly */
+    transform-origin: center center;
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Movie Studio Creator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo" style="cursor:pointer;" id="navHomeLogo">
+        <i class="fa-solid fa-video" style="color: #6366f1;"></i> AI Movie Studio
+        <span class="creator-text">Creator</span>
+      </div>
+      <div class="nav-links">
+        <a href="#" id="navProjects">Projects</a>
+        <a href="#" id="navTemplates">Templates</a>
+        <a href="#" id="exportBtn" class="export-btn">Export</a>
+        <a href="#" id="navSettings" class="settings-nav-btn" title="Settings">
+          <i class="fa-solid fa-gear"></i> Settings
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Container used for all views -->
+    <div class="container">
+      
+      <!-- VIEW: HOME (Default) -->
+      <div id="homeView" class="view-screen">
+        <!-- Hero Section -->
+        <div class="hero">
+          <button class="create-btn">
+            <i class="fa-solid fa-plus"></i> Create New Project
+          </button>
+        </div>
+
+        <!-- Quick Starts -->
+        <div class="section-container">
+          <div class="section-header">
+            <h2>Quick Start</h2>
+            <div class="controls">
+              <i class="fa-solid fa-chevron-left"></i>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+          </div>
+          <div class="grid-quick">
+            <div class="quick-card">
+              <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop" alt="Cosmic Heist" />
+              <div class="card-badge badge-blue"><i class="fa-solid fa-rocket"></i></div>
+              <div class="card-title-lg text-white">Cosmic Heist</div>
+            </div>
+            <div class="quick-card">
+              <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=2000&auto=format&fit=crop" alt="Haunted Hotel" />
+              <div class="card-badge badge-red"><i class="fa-solid fa-ghost"></i></div>
+              <div class="card-title-lg text-white">Haunted Hotel</div>
+            </div>
+            <div class="quick-card">
+              <img src="/neon_samurai.jpg" alt="Neon Samurai" />
+              <div class="card-badge badge-cyan"><i class="fa-solid fa-bolt"></i></div>
+              <div class="card-title-lg text-white">Neon Samurai</div>
+            </div>
+            <div class="quick-card">
+              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" alt="Deep Sea Mystery" />
+              <div class="card-badge badge-blue"><i class="fa-solid fa-water"></i></div>
+              <div class="card-title-lg text-white">Deep Sea Mystery</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: PROJECTS -->
+      <div id="projectsView" class="view-screen" style="display:none;">
+        <h2 style="color: #fff; margin-bottom: 20px;">Your Projects</h2>
+        <div id="projectsGrid" class="grid-recent" style="display:none;"></div>
+        <div id="projectsEmpty" class="empty-state">
+          <i class="fa-solid fa-folder-open" style="font-size: 40px; margin-bottom:15px; color:#888;"></i>
+          <p>You have no saved projects yet.</p>
+        </div>
+      </div>
+
+      <!-- VIEW: TEMPLATES -->
+      <div id="templatesView" class="view-screen" style="display:none;">
+        <div class="grid-templates">
+          <div class="template-card" data-idea="A gritty noir detective investigation in a city where memories can be traded.">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h3>Noir Detective</h3>
+            <p>A hard-boiled mystery set in a dystopian future where secrets are the ultimate currency.</p>
+          </div>
+          <div class="template-card" data-idea="An epic space opera involving a lost starship and a galaxy-wide conspiracy.">
+            <i class="fa-solid fa-shuttle-space"></i>
+            <h3>Space Opera</h3>
+            <p>Grand scale adventure across star systems with ancient relics and corporate wars.</p>
+          </div>
+          <div class="template-card" data-idea="A cyberpunk rebellion against a megacorporation controlling the internet.">
+            <i class="fa-solid fa-microchip"></i>
+            <h3>Cyberpunk Rebellion</h3>
+            <p>High-tech, low-life action as hackers take on the titans of industry.</p>
+          </div>
+          <div class="template-card" data-idea="NEON SAMURAI: In 2099 Neo-Kyoto, a disgraced ronin Kenji Sato must protect a hacker named Mina carrying a Soul-Drive consciousness chip from the ruthless Shogunate Corporation and CEO Hanzo. High-tech katana duels, neon-soaked rain, and a digital revolution.">
+            <i class="fa-solid fa-bolt" style="color: #22d3ee;"></i>
+            <h3>Neon Samurai</h3>
+            <p>A cybernetic ronin protects a hacker carrying the city's last soul. High-stakes cyberpunk action.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: RESULTS -->
+      <div id="resultsView" class="view-screen" style="display:none;">
+        <div class="results-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+            <h2 style="color: #fff;">🎬 Generated Concept</h2>
+            <div style="display:flex; gap: 10px;">
+                <button id="refineStoryBtn" class="export-btn" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd !important; border-color: rgba(59, 130, 246, 0.5);">
+                    <i class="fa-solid fa-pen-nib"></i> Refine Story
+                </button>
+                <button id="backToHomeBtn" class="export-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </button>
+            </div>
+        </div>
+        
+        <!-- Split Results Layout -->
+        <div class="results-layout" style="display: flex; gap: 20px; align-items: stretch; height: 75vh;">
+            <div class="concept-pane" style="flex: 2; overflow-y: auto; padding-right: 10px;">
+                <div id="resultBox" class="results-content"></div>
+
+                <!-- Trailer Preview Panel -->
+                <div id="trailerPreviewPanel" class="trailer-panel" style="margin-top: 24px;">
+                    <div class="trailer-panel-header">
+                        <span><i class="fa-solid fa-film" style="color:#a78bfa;"></i> Trailer Preview — Audio Narration</span>
+                        <button id="generateAudioBtn" class="generate-audio-btn">
+                            <i class="fa-solid fa-headphones"></i> Generate Audio
+                        </button>
+                    </div>
+                    <div id="trailerAudioStatus" class="trailer-status-msg">Set your ElevenLabs API key in Settings, then click Generate Audio.</div>
+                    <audio id="trailerAudioPlayer" controls style="width:100%; display:none; margin-top: 12px; border-radius: 8px;"></audio>
+                    <div id="trailerQueryInfo" class="trailer-query-info" style="display:none;"></div>
+                </div>
+            </div>
+            
+            <div class="chatbot-pane" style="flex: 1; display:flex; flex-direction:column; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;">
+                <h3 style="color: white; margin-bottom: 15px; font-size: 16px; display:flex; align-items:center; gap: 8px;">
+                    <i class="fa-solid fa-robot" style="color:#6366f1;"></i> Story Assistant
+                </h3>
+                <div id="chatHistory" style="flex: 1; overflow-y: auto; margin-bottom: 15px; display:flex; flex-direction:column; gap:12px; font-size:14px;">
+                    <!-- Chat bubbles will go here -->
+                    <div style="color: #9ca3af; text-align: center; font-style: italic; margin-top: auto; margin-bottom: auto;">
+                        Ask me anything to expand on this concept!
+                    </div>
+                </div>
+                <div style="display:flex; gap: 8px;">
+                    <input type="text" id="chatInput" placeholder="How does it end?" style="flex:1; padding: 12px; border-radius:6px; background:#1f2937; color:white; border: 1px solid #374151; outline:none;">
+                    <button id="sendChatBtn" style="padding: 12px 18px; background: #3b82f6; border:none; border-radius:6px; color:white; cursor:pointer; transition:0.2s;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div id="generatorModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 style="color: white; margin-bottom: 20px;">🎬 Generate Your Movie Concept</h2>
+        <input type="text" id="movieIdea" placeholder="Describe your movie idea..." autocomplete="off">
+        <select id="genreSelect">
+          <option value="None">Any Genre</option>
+          <option value="Action">Action</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Horror">Horror</option>
+          <option value="Romance">Romance</option>
+        </select>
+        <button id="generateBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate</button>
+        
+        <!-- Added a mini loader display here -->
+        <div id="modalLoader" style="display:none; text-align:center; padding-top:20px; color:#aaa;">
+           <i>Generating with Claude...</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Refine Modal -->
+    <div id="refineModal" class="modal">
+      <div class="modal-content">
+        <span class="close-refine-btn close-btn">&times;</span>
+        <h2 style="color: white; margin-bottom: 20px;">✍️ Refine Your Story</h2>
+        <input type="text" id="refineIdea" placeholder="e.g., Make it darker, add a love story..." autocomplete="off">
+        <button id="submitRefineBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Regenerate Concept</button>
+        
+        <div id="refineModalLoader" style="display:none; text-align:center; padding-top:20px; color:#aaa;">
+           <i>Refining with Claude...</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+      <div class="modal-content" style="width: 640px;">
+        <span class="close-settings-btn close-btn">&times;</span>
+        <h2 style="color: white; margin-bottom: 8px;"><i class="fa-solid fa-gear" style="color:#6366f1;"></i> Settings</h2>
+        <p style="color:#9ca3af; font-size:13px; margin-bottom:20px;">API keys are stored locally in your browser. They are never sent to any server other than the respective API provider.</p>
+
+        <label style="display:block; color:#d1d5db; font-size:13px; margin-bottom:6px; font-weight:600;">ElevenLabs API Key <span style="color:#9ca3af; font-weight:400;">(for Trailer Audio)</span></label>
+        <div style="position:relative;">
+          <input type="password" id="elevenLabsKeyInput" placeholder="sk_..." autocomplete="off" style="padding-right: 48px;">
+          <button id="toggleElevenLabsKey" type="button" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:#9ca3af; cursor:pointer; font-size:16px; width:auto; padding:4px 8px;">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+        <p style="color:#6b7280; font-size:12px; margin-top:-10px; margin-bottom:20px;">Get your key at <a href="https://elevenlabs.io" target="_blank" style="color:#a78bfa;">elevenlabs.io</a></p>
+
+        <label style="display:block; color:#d1d5db; font-size:13px; margin-bottom:6px; font-weight:600;">Unsplash Access Key <span style="color:#9ca3af; font-weight:400;">(for Character Images — optional)</span></label>
+        <div style="position:relative;">
+          <input type="password" id="unsplashKeyInput" placeholder="Your Unsplash Access Key" autocomplete="off" style="padding-right: 48px;">
+          <button id="toggleUnsplashKey" type="button" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:#9ca3af; cursor:pointer; font-size:16px; width:auto; padding:4px 8px;">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+        <p style="color:#6b7280; font-size:12px; margin-top:-10px; margin-bottom:20px;">Get your key at <a href="https://unsplash.com/developers" target="_blank" style="color:#a78bfa;">unsplash.com/developers</a>. Without a key, the app uses the public Unsplash Source fallback.</p>
+
+        <button id="saveSettingsBtn" style="background: linear-gradient(135deg, #6366f1, #4f46e5);"><i class="fa-solid fa-floppy-disk"></i> Save Settings</button>
+        <div id="settingsSavedMsg" style="display:none; text-align:center; color:#4ade80; margin-top:14px; font-size:14px;"><i class="fa-solid fa-check-circle"></i> Settings saved!</div>
+      </div>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
