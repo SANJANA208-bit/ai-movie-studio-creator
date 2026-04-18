@@ -16,10 +16,10 @@ load_dotenv()
 
 app = FastAPI()
 
-# Configure CORS for local development
+# Configure CORS (Updated for Production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict to localhost Vite port
+    allow_origins=["*"], # For production, you can restrict this to your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,7 +27,11 @@ app.add_middleware(
 
 # Initialize Gemini API
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel('gemini-flash-latest')
+model = genai.GenerativeModel('gemini-1.5-flash')
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
 class GenerateRequest(BaseModel):
     user_input: str

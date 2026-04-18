@@ -1,0 +1,25 @@
+services:
+  # Backend Web Service
+  - type: web
+    name: ai-movie-studio-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python -m uvicorn backend.server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false # User will provide this in the dashboard
+      - key: PYTHON_VERSION
+        value: 3.10.0
+
+  # Frontend Static Site
+  - type: static
+    name: ai-movie-studio-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: frontend/dist
+    envVars:
+      - key: VITE_API_BASE
+        fromService:
+          type: web
+          name: ai-movie-studio-backend
+          property: host

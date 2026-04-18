@@ -57,10 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const trailerQueryInfo = document.getElementById('trailerQueryInfo');
 
     // --- Deployment Settings ---
-    // If you deploy the backend to Render, change this URL to your Render .onrender.com URL
+    // If you deploy the backend to Render, replace the empty string below with your Render .onrender.com URL
+    // e.g. 'https://ai-movie-studio-backend.onrender.com'
+    const PRODUCTION_API_URL = ''; 
+
     const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://127.0.0.1:8000' 
-        : ''; // In production, we'll try to reach the backend dynamically or via a fallback
+        : PRODUCTION_API_URL;
     
     // STATE
     let currentConceptRaw = "";
