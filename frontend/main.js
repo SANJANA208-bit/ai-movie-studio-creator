@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Deployment Settings ---
     // If you deploy the backend to Render, replace the empty string below with your Render .onrender.com URL
     // e.g. 'https://ai-movie-studio-backend.onrender.com'
-    const PRODUCTION_API_URL = ''; 
+    const PRODUCTION_API_URL = 'https://ai-movie-studio-backend.onrender.com'; 
 
     const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://127.0.0.1:8000' 
