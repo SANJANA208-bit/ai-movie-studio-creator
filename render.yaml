@@ -17,7 +17,6 @@ services:
     env: node
     buildCommand: cd frontend && npm install && npm run build
     startCommand: cd frontend && npm run preview
-    publishPath: frontend/dist
     envVars:
       - key: VITE_API_BASE
         fromService:
