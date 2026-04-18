@@ -57,17 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const trailerQueryInfo = document.getElementById('trailerQueryInfo');
 
     // --- Deployment Settings ---
-    // If you deploy the backend to Render, Render will inject VITE_API_BASE automatically.
-    // Fallback to the known Render URL if not present.
-    let injectedUrl = import.meta.env?.VITE_API_BASE || 'https://ai-movie-studio-backend.onrender.com';
-    if (injectedUrl && !injectedUrl.startsWith('http')) {
-        injectedUrl = 'https://' + injectedUrl;
-    }
-    const PRODUCTION_API_URL = injectedUrl;
-
+    // For Vercel deployment, the frontend and backend are on the same domain.
+    // So we can just use relative paths (empty string) for API_BASE.
     const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://127.0.0.1:8000' 
-        : PRODUCTION_API_URL;
+        : '';
     
     // STATE
     let currentConceptRaw = "";
