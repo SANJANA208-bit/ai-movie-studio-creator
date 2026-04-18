@@ -57,9 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const trailerQueryInfo = document.getElementById('trailerQueryInfo');
 
     // --- Deployment Settings ---
-    // If you deploy the backend to Render, replace the empty string below with your Render .onrender.com URL
-    // e.g. 'https://ai-movie-studio-backend.onrender.com'
-    const PRODUCTION_API_URL = 'https://ai-movie-studio-backend.onrender.com'; 
+    // If you deploy the backend to Render, Render will inject VITE_API_BASE automatically.
+    // Fallback to the known Render URL if not present.
+    let injectedUrl = import.meta.env?.VITE_API_BASE || 'https://ai-movie-studio-backend.onrender.com';
+    if (injectedUrl && !injectedUrl.startsWith('http')) {
+        injectedUrl = 'https://' + injectedUrl;
+    }
+    const PRODUCTION_API_URL = injectedUrl;
 
     const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
         ? 'http://127.0.0.1:8000' 
