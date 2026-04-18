@@ -7,15 +7,16 @@ services:
     startCommand: python -m uvicorn backend.server:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GEMINI_API_KEY
-        sync: false # User will provide this in the dashboard
+        sync: false
       - key: PYTHON_VERSION
         value: 3.10.0
 
-  # Frontend Static Site
-  - type: static_site
+  # Frontend Web Service
+  - type: web
     name: ai-movie-studio-frontend
-    env: static
+    env: node
     buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run preview
     publishPath: frontend/dist
     envVars:
       - key: VITE_API_BASE
